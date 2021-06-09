@@ -12,5 +12,8 @@ protocol Coordinator: AnyObject {
     func start()
     func popViewController()
 }
+extension Coordinator{
+    func popViewController(){}
+}
 
 
