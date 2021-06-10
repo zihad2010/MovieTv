@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Alamofire
+
 
 class MovieListViewController: UIViewController {
     
@@ -22,13 +22,18 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        self.movieListCollectionView.rx.setDelegate(self).disposed(by: disposable)
+       
+        let resource = Resource<MovieResponseModel>(url: URL(string: "https://api.themoviedb.org/3/discover/tv?api_key=eb8aa6f914f794f711fb1841fb141f12")!)
+        self.viewModel.fetchDtaWith(resource: resource)
+        self.movieListCollectionView.collectionViewLayout = UICollectionViewFlowLayout.customizedCollectionViewLayoutFor(self.movieListCollectionView)
     }
     
     private func setupBindings() {
         
+        self.movieListCollectionView.register(UINib(nibName: "MovTvItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: String(describing: MovTvItemCollectionViewCell.self))
+        
         viewModel.MovieList.observeOn(MainScheduler.instance)
-            .bind(to: movieListCollectionView.rx.items(cellIdentifier: "MovieListCollectionViewCell", cellType: MovieListCollectionViewCell.self)) {  (row,eachMovie,cell) in
+            .bind(to: movieListCollectionView.rx.items(cellIdentifier: "MovTvItemCollectionViewCell", cellType: MovTvItemCollectionViewCell.self)) {  (row,eachMovie,cell) in
                 cell.eachMovie = eachMovie
             }.disposed(by: disposable)
         
@@ -37,13 +42,4 @@ class MovieListViewController: UIViewController {
         }.disposed(by: disposable)
     }
     
-}
-
-extension MovieListViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
-        let cellWidth = (width - 30) / 3 // compute your cell width
-        return CGSize(width: cellWidth, height: cellWidth / 0.6)
-    }
 }

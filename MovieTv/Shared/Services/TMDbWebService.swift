@@ -7,22 +7,8 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case decodingError
-    case domainError
-    case urlError
-    case nullData
-    case data
-    case offline
-    case invalidURL
-    case undefined
-    
-}
-
-enum Result<T,H> {
-    case success(T,H)
-    case failure(H)
-}
+import Foundation
+import RxSwift
 
 enum HttpMethod: String {
     case get = "GET"
@@ -32,46 +18,21 @@ enum HttpMethod: String {
     case delete = "DELETE"
 }
 
-typealias HandlerResult = Result<Data,Error>
-
-struct Resource {
+struct Resource<T: Decodable> {
     let url: URL
-    var authorization: String?
     var httpMethod: HttpMethod = .get
-    var body: Data? = nil
 }
-
-extension Resource{
-    //    init(url: URL) {
-    //        self.url = url
-    //    }
-}
-
 
 class TMDbWebService {
-    
-    static func load(resource:Resource,completion:@escaping(HandlerResult)->Void )  {
+
+    static func load<T>(resource: Resource<T>) -> Observable<T> {
         
-        URLSession.shared.dataTask(with: URLRequest.requestWith(resource: resource)) {(data, reponse, error) in
-            
-            guard let data = data, error == nil else {
-                completion(.failure(NetworkError.offline))
-                return
-            }
-            
-            if let statusCode = reponse?.getStatusCode() {
-                
-                do {
-                    
-                    if let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] {
-                        print("json data: \(json)")
-                    }
-                }
-                catch let error {
-                    print("error in catch block")
-                    print(error)
-                }
-            }
-        }.resume()
+        return Observable.just(resource.url)
+            .flatMap { url -> Observable<Data> in
+                let request = URLRequest.requestWith(resource: resource)
+                return URLSession.shared.rx.data(request: request)
+            }.map { data -> T in
+                return try JSONDecoder().decode(T.self, from: data)
+        }
     }
 }

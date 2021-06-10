@@ -19,6 +19,22 @@ class MovieListViewModel {
 //    init(_ articles: [Results]) {
 //        self.movieList = articles.compactMap(MovieViewModel.init)
 //    }
+    
+    func fetchDtaWith(resource: Resource<MovieResponseModel>) {
+        
+        TMDbWebService.load(resource: resource)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {[weak self] response in
+                
+                let movieList = response.results?.compactMap(MovieViewModel.init)
+                if let movieList = movieList{
+                    self?.MovieList.onNext(movieList)
+                }
+            }, onError: { error in
+                print(error.localizedDescription)
+            }).disposed(by: disposable)
+        
+    }
 }
 
 struct MovieViewModel {
@@ -33,7 +49,11 @@ struct MovieViewModel {
         return result.name ?? ""
     }
     
-    var poster_path: String {
-        return result.poster_path ?? ""
+    var posterURL: URL? {
+        if let path = result.poster_path {
+            return URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+        }
+        return nil
     }
+    
 }
