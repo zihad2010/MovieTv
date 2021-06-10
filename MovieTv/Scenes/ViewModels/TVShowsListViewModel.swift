@@ -1,27 +1,22 @@
 //
-//  MovieListViewModel.swift
+//  TVShowsViewModel.swift
 //  MovieTv
 //
-//  Created by Asraful Alam on 10/6/21.
+//  Created by Asraful Alam on 11/6/21.
 //
 
 import Foundation
 import RxSwift
 
-public enum HomeError {
-    case internetError(String)
-    case serverMessage(String)
-}
-
-class MovieListViewModel:ViewModelProtocol {
+class TVShowsListViewModel:ViewModelProtocol {
     
     private let disposable = DisposeBag()
-    public let movieList : PublishSubject<[EachItemViewModel]> = PublishSubject()
+    public let tvShowsList : PublishSubject<[EachItemViewModel]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<HomeError> = PublishSubject()
    
     func getResource() -> Resource<ResponseModel> {
-        guard let url = URL.convertUrl(urlStr: URL.mvieListUrl) else {
+        guard let url = URL.convertUrl(urlStr: URL.tvShowsListUrl) else {
             fatalError("URl was incorrect")
         }
         var resource = Resource<ResponseModel>(url: url)
@@ -40,9 +35,9 @@ class MovieListViewModel:ViewModelProtocol {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] response in
                 self?.loading.onNext(false)
-                let movieList = response.results?.compactMap(EachItemViewModel.init)
-                if let movieList = movieList{
-                    self?.movieList.onNext(movieList)
+                let tvShowsList = response.results?.compactMap(EachItemViewModel.init)
+                if let tvShowsList = tvShowsList{
+                    self?.tvShowsList.onNext(tvShowsList)
                 }
             }, onError: {[weak self] (error) in
                 self?.loading.onNext(false)
@@ -53,3 +48,22 @@ class MovieListViewModel:ViewModelProtocol {
     }
 }
 
+struct TVShowsViewModel {
+    
+    let result: Results
+    
+    init(_ result: Results) {
+        self.result = result
+    }
+    
+    var title: String {
+        return result.name ?? ""
+    }
+    
+    var posterURL: URL? {
+        if let path = result.poster_path {
+            return URL(string: "\(URL.photoBaseUrl)\(path)")
+        }
+        return nil
+    }
+}

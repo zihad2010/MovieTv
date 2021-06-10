@@ -139,6 +139,9 @@
                             <constraint firstItem="tSE-uT-1Z8" firstAttribute="leading" secondItem="0zP-5J-gjH" secondAttribute="leading" id="zDW-yR-ltS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tvShowsListCollectionView" destination="fOm-9L-F1D" id="P2y-k1-flc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H42-ND-ziv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -18,7 +18,7 @@ enum HttpMethod: String {
     case delete = "DELETE"
 }
 
-struct Resource<T: Decodable> {
+struct Resource<T: Codable> {
     let url: URL
     var httpMethod: HttpMethod = .get
 }

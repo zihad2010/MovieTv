@@ -1,5 +1,5 @@
 //
-//  MovieResponseModel.swift
+//  ResponseModel.swift
 //  MovieTv
 //
 //  Created by Asraful Alam on 10/6/21.
@@ -7,9 +7,7 @@
 
 import Foundation
 
-import Foundation
-
-struct MovieResponseModel : Codable {
+struct ResponseModel : Codable {
     let page : Int?
     let results : [Results]?
     let total_pages : Int?
@@ -17,6 +15,7 @@ struct MovieResponseModel : Codable {
 }
 
 struct Results : Codable {
+    let adult : Bool?
     let backdrop_path : String?
     let first_air_date : String?
     let genre_ids : [Int]?
@@ -30,4 +29,7 @@ struct Results : Codable {
     let poster_path : String?
     let vote_average : Double?
     let vote_count : Int?
+    let release_date : String?
+    let title : String?
+    let video : Bool?
 }

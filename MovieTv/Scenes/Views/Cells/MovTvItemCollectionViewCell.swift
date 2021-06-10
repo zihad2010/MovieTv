@@ -17,7 +17,7 @@ class MovTvItemCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
 
-     public var eachMovie: MovieViewModel! {
+     public var eachMovie: EachItemViewModel! {
          didSet {
              self.movieTitle.text = eachMovie.title
              guard let url = eachMovie.posterURL else {

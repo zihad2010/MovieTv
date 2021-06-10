@@ -14,7 +14,6 @@ extension URLRequest {
         request.httpMethod = resource.httpMethod.rawValue
         print("url: \(resource.url)")
         request.addValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
-
         return request
     }
 }
