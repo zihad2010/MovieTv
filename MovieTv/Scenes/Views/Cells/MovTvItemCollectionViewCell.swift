@@ -12,11 +12,6 @@ class MovTvItemCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
      public var eachMovie: EachItemViewModel! {
          didSet {
              self.movieTitle.text = eachMovie.title

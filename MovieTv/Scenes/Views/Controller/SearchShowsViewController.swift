@@ -12,6 +12,7 @@ import RxCocoa
 class SearchShowsViewController: UIViewController {
 
     @IBOutlet weak var searchResultTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
    
     private let disposable = DisposeBag()
     private var viewModel = SearchShowsViewModel()
@@ -22,38 +23,76 @@ class SearchShowsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        self.viewModel.fetchDtaWith(resource: self.viewModel.getResource())
     }
     
     
     private func setupBindings() {
         
+        //search bar--
+        searchBar
+            .rx
+            .text
+            .orEmpty
+            .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .bind(to: self.viewModel.searchText)
+            .disposed(by: disposable)
+        
+        searchBar
+            .rx
+            .searchButtonClicked
+            .subscribe(onNext: { [unowned self] in
+                searchBar.resignFirstResponder()
+            })
+            .disposed(by: disposable)
+        
+        searchBar
+            .rx
+            .cancelButtonClicked
+            .subscribe(onNext: { [unowned self] in
+                searchBar.resignFirstResponder()
+            })
+            .disposed(by: disposable)
+
+        
         //Loader ----
-        self.viewModel.loading
+        self.viewModel
+            .loading
             .subscribe(onNext: { [weak self] active in
                 active ? self?.loader.showLoading(view: self?.view) : self?.loader.hideLoading()
-            }).disposed(by: disposable)
+            })
+            .disposed(by: disposable)
         
         // TostView ---
-        self.viewModel.error.observeOn(MainScheduler.instance).subscribe(onNext: { error in
+        self.viewModel
+            .error
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { error in
             switch error{
             case .internetError(let mess):
                 ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
             case .serverMessage(let mess):
                 ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
             }
-        }).disposed(by: disposable)
+        })
+        .disposed(by: disposable)
         
-        // collectionview ---
-        viewModel.searchResultList.observeOn(MainScheduler.instance)
+        // tableview ---
+        viewModel
+            .searchResultList
+            .observeOn(MainScheduler.instance)
             .bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchResultTableViewCell", cellType: SearchResultTableViewCell.self)) {  (row,eachMovie,cell) in
                 cell.eachMovie = eachMovie
-            }.disposed(by: disposable)
+            }
+            .disposed(by: disposable)
         
         //delegate ---
-        self.searchResultTableView.rx.itemSelected.subscribe { indexPath in
+        self.searchResultTableView
+            .rx
+            .itemSelected.subscribe { indexPath in
             
-        }.disposed(by: disposable)
+        }
+        .disposed(by: disposable)
     }
 
 }

@@ -170,12 +170,15 @@
                                                 </segments>
                                                 <color key="selectedSegmentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </segmentedControl>
-                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="vcf-qB-laP">
+                                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcf-qB-laP">
                                                 <rect key="frame" x="0.0" y="51" width="414" height="56"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" systemColor="systemTealColor"/>
                                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                                <scopeButtonTitles>
+                                                    <string>Title</string>
+                                                    <string>Title</string>
+                                                </scopeButtonTitles>
                                             </searchBar>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kc6-3f-z3M">
                                                 <rect key="frame" x="22" y="10" width="72.5" height="26.5"/>
@@ -215,7 +218,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LZW-8Y-Yie">
-                                                    <rect key="frame" x="16" y="33.5" width="78" height="128"/>
+                                                    <rect key="frame" x="16" y="32" width="78" height="128"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="128" id="MhC-We-1Bf">
@@ -265,7 +268,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="zQA-cx-TdD" secondAttribute="trailing" constant="16" id="OH8-N5-2NY"/>
                                                 <constraint firstItem="LZW-8Y-Yie" firstAttribute="leading" secondItem="qXF-ih-xYd" secondAttribute="leading" constant="16" id="qMR-9j-MgI"/>
                                                 <constraint firstItem="zQA-cx-TdD" firstAttribute="leading" secondItem="LZW-8Y-Yie" secondAttribute="trailing" constant="16" id="wuQ-dE-KAR"/>
-                                                <constraint firstItem="LZW-8Y-Yie" firstAttribute="centerY" secondItem="qXF-ih-xYd" secondAttribute="centerY" id="xYE-gd-cea"/>
+                                                <constraint firstItem="LZW-8Y-Yie" firstAttribute="top" secondItem="6LJ-ac-3rz" secondAttribute="top" id="zCW-8N-XfJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -293,6 +296,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="vcf-qB-laP" id="Zmm-zr-caG"/>
                         <outlet property="searchResultTableView" destination="tDh-8c-9cS" id="I0t-s6-SJ0"/>
                     </connections>
                 </viewController>
@@ -355,6 +359,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -37,7 +37,8 @@ class MovieListViewModel:ViewModelProtocol {
         }
         
         self.loading.onNext(true)
-        TMDbWebService.load(resource: resource)
+        TMDbWebService
+            .load(resource: resource)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] response in
                 self?.loading.onNext(false)
@@ -60,7 +61,8 @@ class MovieListViewModel:ViewModelProtocol {
             }, onError: {[weak self] (error) in
                 self?.loading.onNext(false)
                 self?.error.onNext(.serverMessage(error.localizedDescription))
-            }).disposed(by: disposable)
+            })
+            .disposed(by: disposable)
     }
 }
 

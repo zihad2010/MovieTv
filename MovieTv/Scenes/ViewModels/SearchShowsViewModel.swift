@@ -7,16 +7,31 @@
 
 import Foundation
 import  RxSwift
+import RxCocoa
 
-class SearchShowsViewModel : ViewModelProtocol{
+class SearchShowsViewModel {
     
+
     private let disposable = DisposeBag()
+    var searchText = PublishRelay<String>()
     public let searchResultList : PublishSubject<[SearchResultCellVM]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()
     
-    func getResource() -> Resource<ResponseModel> {
-        guard let url = URL.convertUrl(urlStr: URL.mvieListUrl) else {
+    init() {
+        self.searchText
+            .asObservable()
+            .subscribe(onNext: {[weak self] text in
+                if !text.isEmpty {
+                    self?.fetchDtaWith(resource: (self?.getResource(query: text))!)
+                }
+            })
+            .disposed(by: disposable)
+    }
+    
+    func getResource(query: String) -> Resource<ResponseModel> {
+       
+        guard let url = URL.convertUrl(urlStr: URL.searchTvShowsUrl + "\(query)") else {
             fatalError("URl was incorrect")
         }
         var resource = Resource<ResponseModel>(url: url)
@@ -32,7 +47,8 @@ class SearchShowsViewModel : ViewModelProtocol{
         }
         
         self.loading.onNext(true)
-        TMDbWebService.load(resource: resource)
+        TMDbWebService
+            .load(resource: resource)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] response in
                 self?.loading.onNext(false)
@@ -55,7 +71,8 @@ class SearchShowsViewModel : ViewModelProtocol{
             }, onError: {[weak self] (error) in
                 self?.loading.onNext(false)
                 self?.error.onNext(.serverMessage(error.localizedDescription))
-            }).disposed(by: disposable)
+            })
+            .disposed(by: disposable)
     }
 }
 
