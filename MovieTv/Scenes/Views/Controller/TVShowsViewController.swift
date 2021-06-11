@@ -51,11 +51,8 @@ class TVShowsViewController: UIViewController {
                 cell.eachMovie = eachMovie
             }.disposed(by: disposable)
         
-        tvShowsListCollectionView.rx.itemSelected.subscribe { indexPath in
+        self.tvShowsListCollectionView.rx.itemSelected.subscribe { indexPath in
             
         }.disposed(by: disposable)
     }
-    
-   
-
 }

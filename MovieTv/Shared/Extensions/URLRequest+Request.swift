@@ -9,7 +9,6 @@ import Foundation
 
 extension URLRequest {
     static func requestWith<T:Decodable>(resource:Resource<T>)-> URLRequest{
-
         var request = URLRequest(url: resource.url)
         request.httpMethod = resource.httpMethod.rawValue
         print("url: \(resource.url)")

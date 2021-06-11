@@ -17,5 +17,4 @@ final class ShowsDetailsCoordinator: Coordinator {
         let showsDetailsViewController: ShowsDetailsViewController = .instantiate()
         navigationController.pushViewController(showsDetailsViewController, animated: true)
     }
-
 }

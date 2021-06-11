@@ -5,17 +5,18 @@
 //  Created by Asraful Alam on 9/6/21.
 //
 
-import Foundation
-
-import Foundation
 import RxSwift
 
 enum HttpMethod: String {
-    case get = "GET"
-    case post = "POST"
-    case put = "PUT"
-    case patch = "PATCH"
-    case delete = "DELETE"
+    case options = "OPTIONS"
+    case get     = "GET"
+    case head    = "HEAD"
+    case post    = "POST"
+    case put     = "PUT"
+    case patch   = "PATCH"
+    case delete  = "DELETE"
+    case trace   = "TRACE"
+    case connect = "CONNECT"
 }
 
 struct Resource<T: Codable> {
@@ -36,11 +37,11 @@ enum RequestError: Error {
     case invalidResponse
     case serverError
     case serverUnavailable
+    case authorizationError(Data)
 }
 
-
 class TMDbWebService {
-
+    
     static func load<T>(resource: Resource<T>) -> Observable<(ApiResult<T>)> {
         
         return Observable.just(resource.url)
@@ -48,10 +49,22 @@ class TMDbWebService {
                 let request = URLRequest.requestWith(resource: resource)
                 return URLSession.shared.rx.response(request: request)
             }.map { response,data -> (ApiResult<T>) in
-                print("response:-",response.statusCode)
-                //observer.onError(ApiResult.failure(.serverError) as! Error)
-               // return (response, try JSONDecoder().decode(T.self, from: data))
-                return ApiResult.success(try JSONDecoder().decode(T.self, from: data))
-        }
+                
+                switch response.statusCode {
+                case 200...300:
+                    do {
+                        let data = try JSONDecoder().decode(T.self, from: data)
+                        return ApiResult.success(data)
+                    } catch  {
+                        return ApiResult.failure(.unknownError)
+                    }
+                case 400...499:
+                    return ApiResult.failure(.authorizationError(data))
+                case 500...599:
+                    return ApiResult.failure(.serverError)
+                default:
+                    return .failure(.unknownError)
+                }
+            }
     }
 }

@@ -24,9 +24,11 @@ class TVShowsListViewModel:ViewModelProtocol {
         return resource
     }
     
+    
     func fetchDtaWith(resource: Resource<ResponseModel>) {
+        
         guard Reachability.isConnectedToNetwork() else {
-            self.error.onNext(.internetError("Check your Internet connection."))
+            self.error.onNext(.internetError(UIMessages.offline))
             return
         }
         
@@ -38,19 +40,23 @@ class TVShowsListViewModel:ViewModelProtocol {
                 switch response{
                 case .success(let data):
                     let tvShowsList = data.results?.compactMap(EachItemViewModel.init)
-                    if let tvShowsList = tvShowsList{
+                    if let tvShowsList = tvShowsList {
                         self?.tvShowsList.onNext(tvShowsList)
                     }
-                    break
-                case .failure(let error):
-                    break
+                case .failure(let failure):
+                    switch failure {
+                    case .unknownError:
+                        self?.error.onNext(.serverMessage(UIMessages.error))
+                    case .authorizationError(_):
+                        self?.error.onNext(.serverMessage(UIMessages.error))
+                    default:
+                        self?.error.onNext(.serverMessage(UIMessages.error))
+                    }
                 }
             }, onError: {[weak self] (error) in
                 self?.loading.onNext(false)
                 self?.error.onNext(.serverMessage(error.localizedDescription))
-                print(error.localizedDescription)
             }).disposed(by: disposable)
-        
     }
 }
 
