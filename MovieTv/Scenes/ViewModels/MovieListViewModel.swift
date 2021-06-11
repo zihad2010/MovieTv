@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-public enum HomeError {
+public enum ApiError {
     case internetError(String)
     case serverMessage(String)
 }
@@ -18,7 +18,7 @@ class MovieListViewModel:ViewModelProtocol {
     private let disposable = DisposeBag()
     public let movieList : PublishSubject<[EachItemViewModel]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
-    public let error : PublishSubject<HomeError> = PublishSubject()
+    public let error : PublishSubject<ApiError> = PublishSubject()
    
     func getResource() -> Resource<ResponseModel> {
         guard let url = URL.convertUrl(urlStr: URL.mvieListUrl) else {

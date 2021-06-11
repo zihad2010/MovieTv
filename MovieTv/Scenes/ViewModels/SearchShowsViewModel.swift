@@ -1,29 +1,28 @@
 //
-//  TVShowsViewModel.swift
+//  SearchShowsViewModel.swift
 //  MovieTv
 //
 //  Created by Asraful Alam on 11/6/21.
 //
 
 import Foundation
-import RxSwift
+import  RxSwift
 
-class TVShowsListViewModel:ViewModelProtocol {
+class SearchShowsViewModel : ViewModelProtocol{
     
     private let disposable = DisposeBag()
-    public let tvShowsList : PublishSubject<[EachItemViewModel]> = PublishSubject()
+    public let searchResultList : PublishSubject<[SearchResultCellVM]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()
-   
+    
     func getResource() -> Resource<ResponseModel> {
-        guard let url = URL.convertUrl(urlStr: URL.tvShowsListUrl) else {
+        guard let url = URL.convertUrl(urlStr: URL.mvieListUrl) else {
             fatalError("URl was incorrect")
         }
         var resource = Resource<ResponseModel>(url: url)
         resource.httpMethod = .get
         return resource
     }
-    
     
     func fetchDtaWith(resource: Resource<ResponseModel>) {
         
@@ -39,9 +38,9 @@ class TVShowsListViewModel:ViewModelProtocol {
                 self?.loading.onNext(false)
                 switch response{
                 case .success(let data):
-                    let tvShowsList = data.results?.compactMap(EachItemViewModel.init)
-                    if let tvShowsList = tvShowsList {
-                        self?.tvShowsList.onNext(tvShowsList)
+                    let searchResult = data.results?.compactMap(SearchResultCellVM.init)
+                    if let searchResult = searchResult {
+                        self?.searchResultList.onNext(searchResult)
                     }
                 case .failure(let failure):
                     switch failure {
@@ -60,7 +59,9 @@ class TVShowsListViewModel:ViewModelProtocol {
     }
 }
 
-struct TVShowsViewModel {
+
+
+struct SearchResultCellVM {
     
     let result: Results
     
@@ -69,7 +70,16 @@ struct TVShowsViewModel {
     }
     
     var title: String {
-        return result.name ?? ""
+       
+        if let title = result.title {
+            return title
+        }else{
+            return result.name ?? ""
+        }
+    }
+    
+    var overview: String {
+        return result.overview ?? ""
     }
     
     var posterURL: URL? {
