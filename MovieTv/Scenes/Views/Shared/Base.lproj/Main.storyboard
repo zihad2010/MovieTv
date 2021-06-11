@@ -265,6 +265,7 @@
                                                 <constraint firstItem="zQA-cx-TdD" firstAttribute="height" relation="greaterThanOrEqual" secondItem="LZW-8Y-Yie" secondAttribute="height" priority="750" id="1X0-Me-Cs6"/>
                                                 <constraint firstAttribute="bottom" secondItem="zQA-cx-TdD" secondAttribute="bottom" constant="16" id="2S9-me-fMN"/>
                                                 <constraint firstItem="zQA-cx-TdD" firstAttribute="top" secondItem="qXF-ih-xYd" secondAttribute="top" constant="16" id="G0k-5B-HPc"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LZW-8Y-Yie" secondAttribute="bottom" constant="35" id="KhD-7N-BLv"/>
                                                 <constraint firstAttribute="trailing" secondItem="zQA-cx-TdD" secondAttribute="trailing" constant="16" id="OH8-N5-2NY"/>
                                                 <constraint firstItem="LZW-8Y-Yie" firstAttribute="leading" secondItem="qXF-ih-xYd" secondAttribute="leading" constant="16" id="qMR-9j-MgI"/>
                                                 <constraint firstItem="zQA-cx-TdD" firstAttribute="leading" secondItem="LZW-8Y-Yie" secondAttribute="trailing" constant="16" id="wuQ-dE-KAR"/>
@@ -298,6 +299,7 @@
                     <connections>
                         <outlet property="searchBar" destination="vcf-qB-laP" id="Zmm-zr-caG"/>
                         <outlet property="searchResultTableView" destination="tDh-8c-9cS" id="I0t-s6-SJ0"/>
+                        <outlet property="segmentControl" destination="DfM-fP-xNa" id="Tte-p6-98G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9vK-tv-t6h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

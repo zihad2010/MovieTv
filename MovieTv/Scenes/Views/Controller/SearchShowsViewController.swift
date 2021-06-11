@@ -10,10 +10,11 @@ import RxSwift
 import RxCocoa
 
 class SearchShowsViewController: UIViewController {
-
+    
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-   
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
     private let disposable = DisposeBag()
     private var viewModel = SearchShowsViewModel()
     private let loader = ActivityIndicator()
@@ -27,6 +28,11 @@ class SearchShowsViewController: UIViewController {
     
     
     private func setupBindings() {
+        
+        segmentControl
+            .rx
+            .selectedSegmentIndex.bind(to: self.viewModel.segmentIndex)
+            .disposed(by: disposable)
         
         //search bar--
         searchBar
@@ -42,7 +48,7 @@ class SearchShowsViewController: UIViewController {
             .rx
             .searchButtonClicked
             .subscribe(onNext: { [unowned self] in
-                searchBar.resignFirstResponder()
+               searchBar.resignFirstResponder()
             })
             .disposed(by: disposable)
         
@@ -53,7 +59,7 @@ class SearchShowsViewController: UIViewController {
                 searchBar.resignFirstResponder()
             })
             .disposed(by: disposable)
-
+        
         
         //Loader ----
         self.viewModel
@@ -68,14 +74,14 @@ class SearchShowsViewController: UIViewController {
             .error
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { error in
-            switch error{
-            case .internetError(let mess):
-                ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
-            case .serverMessage(let mess):
-                ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
-            }
-        })
-        .disposed(by: disposable)
+                switch error{
+                case .internetError(let mess):
+                    ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
+                case .serverMessage(let mess):
+                    ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
+                }
+            })
+            .disposed(by: disposable)
         
         // tableview ---
         viewModel
@@ -90,9 +96,9 @@ class SearchShowsViewController: UIViewController {
         self.searchResultTableView
             .rx
             .itemSelected.subscribe { indexPath in
-            
-        }
-        .disposed(by: disposable)
+                
+            }
+            .disposed(by: disposable)
     }
-
+    
 }

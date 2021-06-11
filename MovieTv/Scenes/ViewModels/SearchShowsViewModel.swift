@@ -11,27 +11,44 @@ import RxCocoa
 
 class SearchShowsViewModel {
     
-
+    
     private let disposable = DisposeBag()
-    var searchText = PublishRelay<String>()
+    private var searchType: String? =  TMDbSearchingCollection(index: 0).map { $0.rawValue }
+    public var segmentIndex = PublishRelay<Int>()
+    public var searchText = PublishRelay<String>()
     public let searchResultList : PublishSubject<[SearchResultCellVM]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()
     
     init() {
-        self.searchText
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        
+        segmentIndex
+            .asObservable()
+            .subscribe(onNext: {[weak self] indx in
+                print(indx)
+                if let searchType = TMDbSearchingCollection(index: indx) {
+                    self?.searchType = searchType.description
+                }
+            })
+            .disposed(by: disposable)
+        
+        searchText
             .asObservable()
             .subscribe(onNext: {[weak self] text in
                 if !text.isEmpty {
-                    self?.fetchDtaWith(resource: (self?.getResource(query: text))!)
+                    self?.fetchDtaWith(resource: (self?.getResource(type: (self?.searchType)!, query: text))!)
                 }
             })
             .disposed(by: disposable)
     }
     
-    func getResource(query: String) -> Resource<ResponseModel> {
-       
-        guard let url = URL.convertUrl(urlStr: URL.searchTvShowsUrl + "\(query)") else {
+    func getResource(type:String,query: String) -> Resource<ResponseModel> {
+        
+        guard let url = URL.getSearchingUrl(type, query) else {
             fatalError("URl was incorrect")
         }
         var resource = Resource<ResponseModel>(url: url)
@@ -39,6 +56,10 @@ class SearchShowsViewModel {
         return resource
     }
     
+}
+
+extension SearchShowsViewModel {
+   
     func fetchDtaWith(resource: Resource<ResponseModel>) {
         
         guard Reachability.isConnectedToNetwork() else {
@@ -76,33 +97,27 @@ class SearchShowsViewModel {
     }
 }
 
-
-
-struct SearchResultCellVM {
-    
-    let result: Results
-    
-    init(_ result: Results) {
-        self.result = result
-    }
-    
-    var title: String {
-       
-        if let title = result.title {
-            return title
-        }else{
-            return result.name ?? ""
+public enum TMDbSearchingCollection: String, CustomStringConvertible, CaseIterable {
+    case movie
+    case tv
+   
+    public init?(index: Int) {
+        switch index {
+        case 0:
+            self = .movie
+        case 1:
+            self = .tv
+        default:
+            return nil
         }
     }
     
-    var overview: String {
-        return result.overview ?? ""
-    }
-    
-    var posterURL: URL? {
-        if let path = result.poster_path {
-            return URL(string: "\(URL.photoBaseUrl)\(path)")
+    public var description: String {
+        switch self {
+        case .movie:
+            return "movie"
+        case .tv:
+            return "tv"
         }
-        return nil
     }
 }
