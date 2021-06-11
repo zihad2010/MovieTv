@@ -28,5 +28,4 @@ extension Reactive where Base: UILabel {
     }
     
 }
-
 #endif

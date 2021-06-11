@@ -28,23 +28,23 @@ class MovieListViewController: UIViewController {
     
     private func setupBindings() {
         
+        //Loader ----
         self.viewModel.loading
             .subscribe(onNext: { [weak self] active in
                 active ? self?.loader.showLoading(view: self?.view) : self?.loader.hideLoading()
             }).disposed(by: disposable)
         
+        // TostView ---
         self.viewModel.error.observeOn(MainScheduler.instance).subscribe(onNext: { error in
             switch error{
             case .internetError(let mess):
                 ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
-                break
-                
             case .serverMessage(let mess):
                 ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
-                break
             }
         }).disposed(by: disposable)
         
+        // collectionview ---
         self.movieListCollectionView.register(UINib(nibName: "MovTvItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: String(describing: MovTvItemCollectionViewCell.self))
         
         viewModel.movieList.observeOn(MainScheduler.instance)
@@ -52,6 +52,7 @@ class MovieListViewController: UIViewController {
                 cell.eachMovie = eachMovie
             }.disposed(by: disposable)
         
+        //delegate ---
         movieListCollectionView.rx.itemSelected.subscribe { indexPath in
             
         }.disposed(by: disposable)

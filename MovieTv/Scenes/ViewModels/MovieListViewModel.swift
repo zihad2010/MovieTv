@@ -30,8 +30,9 @@ class MovieListViewModel:ViewModelProtocol {
     }
     
     func fetchDtaWith(resource: Resource<ResponseModel>) {
+        
         guard Reachability.isConnectedToNetwork() else {
-            self.error.onNext(.internetError("Check your Internet connection."))
+            self.error.onNext(.internetError("The Internet connection appears to be offline."))
             return
         }
         
@@ -40,15 +41,23 @@ class MovieListViewModel:ViewModelProtocol {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] response in
                 self?.loading.onNext(false)
-                let movieList = response.results?.compactMap(EachItemViewModel.init)
-                if let movieList = movieList{
-                    self?.movieList.onNext(movieList)
+                switch response{
+                case .success(let data):
+                    let movieList = data.results?.compactMap(EachItemViewModel.init)
+                    if let tvShowsList = movieList{
+                        self?.movieList.onNext(tvShowsList)
+                    }
+                    break
+                case .failure(let error):
+                    break
                 }
             }, onError: {[weak self] (error) in
                 self?.loading.onNext(false)
+                print(error.localizedDescription)
                 self?.error.onNext(.serverMessage(error.localizedDescription))
                 print(error.localizedDescription)
             }).disposed(by: disposable)
+        
         
     }
 }
