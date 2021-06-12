@@ -12,10 +12,12 @@ import RxCocoa
 class SearchShowsViewModel {
     
     private let disposable = DisposeBag()
-    private var searchType: String? =  TMDbSearchingCollection(index: 0).map { $0.rawValue }
+    public let info: PublishSubject<Info> = PublishSubject()
+    public var searchType: String? =  TMDbSearchingCollection(index: 0).map { $0.rawValue }
+    private var lastSarchText: String?
     public var segmentIndex = PublishRelay<Int>()
     public var searchText =  BehaviorRelay<String>(value: "")
-    public let searchResultList : PublishSubject<[SearchResultCellVM]> = PublishSubject()
+    public let searchResultList : PublishSubject<[EachItemViewModel]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()
     
@@ -27,10 +29,12 @@ class SearchShowsViewModel {
         
         segmentIndex
             .asObservable()
-            .subscribe(onNext: {[weak self] indx in
-                print(indx)
+            .subscribe(onNext: {[unowned self] indx in
                 if let searchType = TMDbSearchingCollection(index: indx) {
-                    self?.searchType = searchType.description
+                    self.searchType = searchType.description
+                    if let lastSearchText = self.lastSarchText {
+                        self.searchText.accept(lastSearchText)
+                    }
                 }
             })
             .disposed(by: disposable)
@@ -38,8 +42,11 @@ class SearchShowsViewModel {
         searchText
             .asObservable()
             .subscribe(onNext: {[weak self] text in
+                self?.lastSarchText = text
                 if !text.isEmpty {
                     self?.fetchDtaWith(resource: (self?.getResource(type: (self?.searchType)!, query: text))!)
+                }else{
+                    self?.searchResultList.onNext([])
                 }
             })
             .disposed(by: disposable)
@@ -72,8 +79,10 @@ extension SearchShowsViewModel {
                 self?.loading.onNext(false)
                 switch response{
                 case .success(let data):
-                    let searchResult = data.results?.compactMap(SearchResultCellVM.init)
-                    if let searchResult = searchResult {
+                    let searchResult = data.results?.map({ (item) -> EachItemViewModel in
+                        return EachItemViewModel(item)
+                    })
+                    if let searchResult = searchResult{
                         self?.searchResultList.onNext(searchResult)
                     }
                 case .failure(let failure):

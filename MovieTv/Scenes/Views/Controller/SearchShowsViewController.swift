@@ -16,7 +16,7 @@ class SearchShowsViewController: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
     private let disposable = DisposeBag()
-    private var viewModel = SearchShowsViewModel()
+    public var viewModel = SearchShowsViewModel()
     private let loader = ActivityIndicator()
     var coordinator: SearchShowsCoordinator?
     
@@ -48,7 +48,7 @@ class SearchShowsViewController: UIViewController {
             .rx
             .searchButtonClicked
             .subscribe(onNext: { [unowned self] in
-               searchBar.resignFirstResponder()
+                searchBar.resignFirstResponder()
             })
             .disposed(by: disposable)
         
@@ -93,11 +93,12 @@ class SearchShowsViewController: UIViewController {
             .disposed(by: disposable)
         
         //delegate ---
-        self.searchResultTableView
-            .rx
-            .itemSelected.subscribe { indexPath in
-                
-            }
+        searchResultTableView
+            .rx.modelSelected(EachItemViewModel.self)
+            .subscribe(onNext: { model in
+                print(model)
+                self.viewModel.info.onNext(Info(id: model.id, type: self.viewModel.searchType))
+            })
             .disposed(by: disposable)
     }
     

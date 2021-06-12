@@ -26,7 +26,6 @@
 		87705F1E267370350009146A /* UIMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87705F1D267370350009146A /* UIMessages.swift */; };
 		87705F2726738CC10009146A /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87705F2626738CC10009146A /* SearchResultTableViewCell.swift */; };
 		87705F2C26738D110009146A /* SearchShowsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87705F2B26738D110009146A /* SearchShowsViewModel.swift */; };
-		87705F572673EE9E0009146A /* SearchResultCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87705F562673EE9E0009146A /* SearchResultCellVM.swift */; };
 		87824125267498AB00D84F8C /* DetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87824124267498AA00D84F8C /* DetailsResponse.swift */; };
 		8782412F26749F4E00D84F8C /* poster.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8782412E26749F4E00D84F8C /* poster.jpeg */; };
 		878241342674AA1B00D84F8C /* ShowsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878241332674AA1B00D84F8C /* ShowsDetailsViewModel.swift */; };
@@ -102,7 +101,6 @@
 		87705F1D267370350009146A /* UIMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMessages.swift; sourceTree = "<group>"; };
 		87705F2626738CC10009146A /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		87705F2B26738D110009146A /* SearchShowsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchShowsViewModel.swift; sourceTree = "<group>"; };
-		87705F562673EE9E0009146A /* SearchResultCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCellVM.swift; sourceTree = "<group>"; };
 		87824124267498AA00D84F8C /* DetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsResponse.swift; sourceTree = "<group>"; };
 		8782412E26749F4E00D84F8C /* poster.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = poster.jpeg; sourceTree = "<group>"; };
 		878241332674AA1B00D84F8C /* ShowsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 				8783F5D726715853008D88F3 /* MovieListViewModel.swift */,
 				8758E55D2672A4E4003FABA0 /* TVShowsListViewModel.swift */,
 				8758E5652672A905003FABA0 /* EachItemViewModel.swift */,
-				87705F562673EE9E0009146A /* SearchResultCellVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -680,7 +677,6 @@
 				8783F5AA26713690008D88F3 /* UIViewController+Extensions.swift in Sources */,
 				8758E4F126728CD2003FABA0 /* StrokeColorAnimation.swift in Sources */,
 				8758E4F326728CD2003FABA0 /* ProgressView.swift in Sources */,
-				87705F572673EE9E0009146A /* SearchResultCellVM.swift in Sources */,
 				8758E4E726728CB1003FABA0 /* ActivityIndicator.swift in Sources */,
 				8758E48F26727E6B003FABA0 /* ViewModelProtocol.swift in Sources */,
 				8783F5D826715853008D88F3 /* MovieListViewModel.swift in Sources */,

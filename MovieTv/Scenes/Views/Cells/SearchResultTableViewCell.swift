@@ -12,7 +12,7 @@ class SearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var  posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
    
-    public var eachMovie: SearchResultCellVM! {
+    public var eachMovie: EachItemViewModel! {
         didSet {
             self.titleLabel.text = eachMovie.title
             guard let url = eachMovie.posterURL else {
