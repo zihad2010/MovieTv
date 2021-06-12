@@ -355,47 +355,62 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eai-mS-EFQ">
-                                <rect key="frame" x="0.0" y="112" width="414" height="750"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="758"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aon-WB-BRe">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="715.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="poster.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="9V9-4m-xn7">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="207"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="248.5"/>
                                             </imageView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SwL-Z3-Uy8">
-                                                <rect key="frame" x="16" y="217" width="382" height="373"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="SwL-Z3-Uy8">
+                                                <rect key="frame" x="16" y="258.5" width="382" height="447"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Gg-bi-3nS">
-                                                        <rect key="frame" x="0.0" y="0.0" width="65.5" height="29"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="68.5" height="30"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019 • 129 min • 5.9/10 ★" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3x-7e-xjV">
-                                                        <rect key="frame" x="0.0" y="39" width="220.5" height="23"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <rect key="frame" x="0.0" y="35" width="229.5" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bangla • Hindi Bangla • Hindi Bangla • Hindi Bangla • Hindi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoQ-pp-Llt">
-                                                        <rect key="frame" x="0.0" y="72" width="372.5" height="45.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <rect key="frame" x="0.0" y="64" width="382" height="48"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9Q-YR-JnK">
-                                                        <rect key="frame" x="0.0" y="127.5" width="55" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="0.0" y="117" width="63.5" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qx9-Dz-tQe">
-                                                        <rect key="frame" x="0.0" y="158" width="382" height="215"/>
+                                                        <rect key="frame" x="0.0" y="146" width="382" height="301"/>
                                                         <mutableString key="text">n 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.</mutableString>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
                                             </stackView>
@@ -429,11 +444,11 @@
                             <constraint firstItem="bbz-LS-LcA" firstAttribute="leading" secondItem="Dmm-te-Xmp" secondAttribute="leading" id="RxK-kY-bYf"/>
                             <constraint firstItem="TcB-fH-xGi" firstAttribute="top" secondItem="UrT-fv-YUq" secondAttribute="top" id="TOl-jD-vMb"/>
                             <constraint firstItem="Dmm-te-Xmp" firstAttribute="top" secondItem="bbz-LS-LcA" secondAttribute="top" id="Viq-wD-9nv"/>
-                            <constraint firstItem="Eai-mS-EFQ" firstAttribute="top" secondItem="TcB-fH-xGi" secondAttribute="bottom" constant="8" symbolic="YES" id="ZTQ-ca-Q69"/>
                             <constraint firstItem="Dmm-te-Xmp" firstAttribute="trailing" secondItem="TcB-fH-xGi" secondAttribute="trailing" id="aaZ-cr-c7o"/>
+                            <constraint firstItem="Eai-mS-EFQ" firstAttribute="top" secondItem="bbz-LS-LcA" secondAttribute="bottom" id="bmI-Mo-Hl2"/>
                             <constraint firstItem="Dmm-te-Xmp" firstAttribute="trailing" secondItem="Eai-mS-EFQ" secondAttribute="trailing" id="bxG-BQ-pI3"/>
                             <constraint firstItem="TcB-fH-xGi" firstAttribute="leading" secondItem="Dmm-te-Xmp" secondAttribute="leading" id="jFJ-wz-ckF"/>
-                            <constraint firstItem="9V9-4m-xn7" firstAttribute="height" secondItem="UrT-fv-YUq" secondAttribute="width" multiplier="0.5" id="oi3-jt-bn8"/>
+                            <constraint firstItem="9V9-4m-xn7" firstAttribute="height" secondItem="UrT-fv-YUq" secondAttribute="width" multiplier="0.6" id="oi3-jt-bn8"/>
                             <constraint firstItem="Dmm-te-Xmp" firstAttribute="bottom" secondItem="Eai-mS-EFQ" secondAttribute="bottom" id="w9T-bC-DwJ"/>
                             <constraint firstItem="Aon-WB-BRe" firstAttribute="height" secondItem="UrT-fv-YUq" secondAttribute="height" multiplier="0.142857" priority="250" id="wOT-6g-zeX"/>
                         </constraints>
@@ -450,7 +465,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4j4-Ce-Ik4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3405.7971014492755" y="102.45535714285714"/>
+            <point key="canvasLocation" x="3360.8695652173915" y="105.80357142857143"/>
         </scene>
     </scenes>
     <resources>
