@@ -17,7 +17,6 @@ extension URLRequest {
     }
 }
 
-
 enum HTTPHeaderField: String {
     case authentication  = "Authorization"
     case contentType     = "Content-Type"

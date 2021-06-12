@@ -39,10 +39,10 @@ import UIKit
     }
     
     @objc func hideLoading() {
-            DispatchQueue.main.async { [self] in
-                self.loadingIndicator.isAnimating = false
-                container.removeFromSuperview()
-            }
+        DispatchQueue.main.async { [self] in
+            self.loadingIndicator.isAnimating = false
+            container.removeFromSuperview()
+        }
     }
     
     func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
@@ -52,5 +52,5 @@ import UIKit
         return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
     
-
+    
 }

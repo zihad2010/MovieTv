@@ -47,7 +47,6 @@ class MovieListViewModel:ViewModelProtocol {
                 self?.loading.onNext(false)
                 switch response{
                 case .success(let data ):
-                    print(data)
                     let data = data as! ResponseModel
                     let movieList = data.results?.map({ (item) -> EachItemViewModel in
                         return EachItemViewModel(item)

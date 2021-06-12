@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class TVShowsViewController: UIViewController {
-
+    
     @IBOutlet private weak var tvShowsListCollectionView: UICollectionView!
     
     var coordinator: TVShowsCoordinator?
@@ -38,17 +38,17 @@ class TVShowsViewController: UIViewController {
             .error
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { error in
-            switch error{
-            case .internetError(let mess):
-                ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
-                break
-                
-            case .serverMessage(let mess):
-                ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
-                break
-            }
-        })
-        .disposed(by: disposable)
+                switch error{
+                case .internetError(let mess):
+                    ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
+                    break
+                    
+                case .serverMessage(let mess):
+                    ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
+                    break
+                }
+            })
+            .disposed(by: disposable)
         
         //collection view
         self.tvShowsListCollectionView.register(UINib(nibName: "MovTvItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: String(describing: MovTvItemCollectionViewCell.self))

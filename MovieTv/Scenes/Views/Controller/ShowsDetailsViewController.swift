@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class ShowsDetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ratingDeatilsLabel: UILabel!
@@ -26,14 +26,14 @@ class ShowsDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         setupBindings()
     }
     
     private func setupBindings(){
         
         viewModel.info.subscribe(onNext: { [self] info in
-           
+            
             self.viewModel.fetchDtaWith(resource: self.viewModel.getResource(info: info))
         }).disposed(by: disposable)
         
@@ -59,7 +59,7 @@ class ShowsDetailsViewController: UIViewController {
                 }
             })
             .disposed(by: disposable)
-
+        
         viewModel
             .posterImageUrl
             .observeOn(MainScheduler.instance)
@@ -68,7 +68,7 @@ class ShowsDetailsViewController: UIViewController {
                 } failer: { (failed) in
                 }
             }).disposed(by: disposable)
-
+        
         viewModel
             .title
             .observeOn(MainScheduler.instance)
@@ -97,5 +97,5 @@ class ShowsDetailsViewController: UIViewController {
     @IBAction func backButtonisClicked() {
         self.coordinator?.popViewController()
     }
-
+    
 }

@@ -61,23 +61,3 @@ class TVShowsListViewModel: ViewModelProtocol {
             .disposed(by: disposable)
     }
 }
-
-struct TVShowsViewModel {
-    
-    let result: Results
-    
-    init(_ result: Results) {
-        self.result = result
-    }
-    
-    var title: String {
-        return result.name ?? ""
-    }
-    
-    var posterURL: URL? {
-        if let path = result.poster_path {
-            return URL(string: "\(URL.photoBaseUrl)\(path)")
-        }
-        return nil
-    }
-}

@@ -73,7 +73,7 @@ import Foundation
         }
     }
     
-   @objc open func shortWithCompletion(_ view: UIView,txt_msg:String,completion: @escaping (_ success: String) -> Void) {
+    @objc open func shortWithCompletion(_ view: UIView,txt_msg:String,completion: @escaping (_ success: String) -> Void) {
         self.setup(view,txt_msg: txt_msg)
         //Animation
         UIView.animate(withDuration: 1, animations: {

@@ -10,7 +10,6 @@ import RxSwift
 
 final class SearchShowsCoordinator: NSObject,Coordinator {
     
-    
     var childCoordinators: [Coordinator] = []
     let navigationController = UINavigationController()
     private let disposable = DisposeBag()
@@ -39,7 +38,6 @@ final class SearchShowsCoordinator: NSObject,Coordinator {
         navigationController.delegate = self
         childCoordinators.append(showsDetailsCoordinator)
         showsDetailsCoordinator.start()
-        
     }
     
 }
