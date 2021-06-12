@@ -166,16 +166,19 @@
                                         <rect key="frame" x="0.0" y="44" width="414" height="60"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DfM-fP-xNa">
-                                                <rect key="frame" x="231" y="14.5" width="161" height="32"/>
+                                                <rect key="frame" x="298" y="14.5" width="100" height="32"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Trl-9c-wLp"/>
+                                                </constraints>
                                                 <segments>
                                                     <segment title="Movie"/>
-                                                    <segment title="TV Shows"/>
+                                                    <segment title="TV"/>
                                                 </segments>
                                                 <color key="selectedSegmentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </segmentedControl>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kc6-3f-z3M">
-                                                <rect key="frame" x="22" y="17" width="72.5" height="26.5"/>
+                                                <rect key="frame" x="171" y="17" width="72.5" height="26.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -184,12 +187,12 @@
                                         <color key="backgroundColor" red="0.61960784313725492" green="0.0" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="kc6-3f-z3M" firstAttribute="centerY" secondItem="oql-l9-Zbm" secondAttribute="centerY" id="1SJ-Fb-fOw"/>
+                                            <constraint firstItem="kc6-3f-z3M" firstAttribute="centerX" secondItem="oql-l9-Zbm" secondAttribute="centerX" id="BNG-58-hJ1"/>
                                             <constraint firstAttribute="height" constant="60" id="RZc-P7-BGI">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
                                             </constraint>
-                                            <constraint firstAttribute="trailing" secondItem="DfM-fP-xNa" secondAttribute="trailing" constant="22" id="VbN-Il-7gT"/>
+                                            <constraint firstAttribute="trailing" secondItem="DfM-fP-xNa" secondAttribute="trailing" constant="16" id="VbN-Il-7gT"/>
                                             <constraint firstItem="DfM-fP-xNa" firstAttribute="centerY" secondItem="kc6-3f-z3M" secondAttribute="centerY" id="i3b-oL-6tb"/>
-                                            <constraint firstItem="kc6-3f-z3M" firstAttribute="leading" secondItem="oql-l9-Zbm" secondAttribute="leading" constant="22" id="sxI-c4-PM2"/>
                                         </constraints>
                                     </view>
                                 </subviews>
