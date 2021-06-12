@@ -14,7 +14,6 @@ final class TabBarCoordinator: Coordinator {
     private let window: UIWindow
     private let navigationController = UINavigationController()
     
-    
     init(window: UIWindow) {
         self.window = window
     }
@@ -24,7 +23,6 @@ final class TabBarCoordinator: Coordinator {
         let tabBarController = UITabBarController()
         
         let movieListCoordinator = MovieListCoordinator()
-      //  movieListCoordinator.coordinator = self
         self.childCoordinators.append(movieListCoordinator)
         movieListCoordinator.start()
         

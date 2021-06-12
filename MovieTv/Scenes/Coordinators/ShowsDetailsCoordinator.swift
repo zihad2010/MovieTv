@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import UIKit
-import RxSwift
 import RxCocoa
 
 final class ShowsDetailsCoordinator: Coordinator {
@@ -20,7 +18,7 @@ final class ShowsDetailsCoordinator: Coordinator {
         self.navigationController = navigationController
         self.info = info
     }
-
+    
     func start() {
         let showsDetailsViewController: ShowsDetailsViewController = .instantiate()
         showsDetailsViewController.viewModel.info.accept(self.info)
