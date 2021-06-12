@@ -27,8 +27,8 @@ final class TVShowsCoordinator: Coordinator {
             })
             .disposed(by:disposable)
         navigationController.tabBarItem.title = "TV Shows"
-//        homeVC.tabBarItem.image = UIImage(named: ItemImage.RaffekLine.rawValue)
-//        homeVC.tabBarItem.selectedImage = UIImage(named: SelectedImage.RaffekLineSelected.rawValue)
+        navigationController.tabBarItem.image = UIImage(named: "unselectedTv")
+        navigationController.tabBarItem.selectedImage = UIImage(named:"selectedTv")
         navigationController.navigationBar.barStyle = .black
         navigationController.navigationBar.isHidden = true
         navigationController.pushViewController(tvShowsViewController, animated: true)

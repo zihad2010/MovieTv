@@ -26,8 +26,8 @@ final class MovieListCoordinator: Coordinator {
             })
             .disposed(by:disposable)
         navigationController.tabBarItem.title = "Movie"
-//        homeVC.tabBarItem.image = UIImage(named: ItemImage.RaffekLine.rawValue)
-//        homeVC.tabBarItem.selectedImage = UIImage(named: SelectedImage.RaffekLineSelected.rawValue)
+        navigationController.tabBarItem.image = UIImage(named:"unselectedMovie")
+        navigationController.tabBarItem.selectedImage = UIImage(named: "selectedMovie")
         navigationController.navigationBar.barStyle = .black
         navigationController.navigationBar.isHidden = true
         navigationController.pushViewController(movieListViewController, animated: true)

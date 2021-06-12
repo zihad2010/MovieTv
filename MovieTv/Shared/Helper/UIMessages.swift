@@ -6,6 +6,6 @@
 //
 
 enum UIMessages {
-    static let error: String = "Oops, there was an error fetching data :(\nPlease, check your connection and try again."
+    static let error: String = "Oops, there was an error fetching data and try again."
     static let offline:String = "The Internet connection appears to be offline."
 }

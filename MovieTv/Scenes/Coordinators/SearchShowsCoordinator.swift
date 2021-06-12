@@ -27,9 +27,9 @@ final class SearchShowsCoordinator: Coordinator {
             })
             .disposed(by:disposable)
         
-       navigationController.tabBarItem.title = "Search"
-//        homeVC.tabBarItem.image = UIImage(named: ItemImage.RaffekLine.rawValue)
-//        homeVC.tabBarItem.selectedImage = UIImage(named: SelectedImage.RaffekLineSelected.rawValue)
+        navigationController.tabBarItem.title = "Search"
+        navigationController.tabBarItem.image = UIImage(named: "unselectedSearch")
+        navigationController.tabBarItem.selectedImage = UIImage(named: "selectedSearch")
         navigationController.navigationBar.barStyle = .black
         navigationController.navigationBar.isHidden = true
         navigationController.pushViewController(searchShowsViewController, animated: true)
