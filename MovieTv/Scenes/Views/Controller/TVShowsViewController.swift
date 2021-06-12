@@ -21,7 +21,7 @@ class TVShowsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        self.viewModel.fetchDtaWith(resource: self.viewModel.getResource())
+        self.viewModel.fetchDtaWith(resource:self.viewModel.getResource(value: String.self) as! Resource<ResponseModel>)
         self.tvShowsListCollectionView.collectionViewLayout = UICollectionViewFlowLayout.customizedCollectionViewLayoutFor(self.tvShowsListCollectionView)
     }
     

@@ -8,14 +8,14 @@
 import Foundation
 import RxSwift
 
-class TVShowsListViewModel:ViewModelProtocol {
+class TVShowsListViewModel: ViewModelProtocol {
     
     private let disposable = DisposeBag()
     public let tvShowsList : PublishSubject<[EachItemViewModel]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()
    
-    func getResource() -> Resource<ResponseModel> {
+    func getResource<T>(value:T.Type) -> Any {
         guard let url = URL.convertUrl(urlStr: URL.tvShowsListUrl) else {
             fatalError("URl was incorrect")
         }
@@ -25,13 +25,12 @@ class TVShowsListViewModel:ViewModelProtocol {
     }
     
     
-    func fetchDtaWith(resource: Resource<ResponseModel>) {
+    func fetchDtaWith<T>(resource: Resource<T>)  {
         
         guard Reachability.isConnectedToNetwork() else {
             self.error.onNext(.internetError(UIMessages.offline))
             return
         }
-        
         self.loading.onNext(true)
         TMDbWebService
             .load(resource: resource)
@@ -40,6 +39,7 @@ class TVShowsListViewModel:ViewModelProtocol {
                 self?.loading.onNext(false)
                 switch response{
                 case .success(let data):
+                    let data = data as! ResponseModel
                     let tvShowsList = data.results?.compactMap(EachItemViewModel.init)
                     if let tvShowsList = tvShowsList {
                         self?.tvShowsList.onNext(tvShowsList)

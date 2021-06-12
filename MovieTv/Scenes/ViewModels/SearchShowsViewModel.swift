@@ -15,7 +15,7 @@ class SearchShowsViewModel {
     private let disposable = DisposeBag()
     private var searchType: String? =  TMDbSearchingCollection(index: 0).map { $0.rawValue }
     public var segmentIndex = PublishRelay<Int>()
-    public var searchText = PublishRelay<String>()
+    public var searchText =  BehaviorRelay<String>(value: "")
     public let searchResultList : PublishSubject<[SearchResultCellVM]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()

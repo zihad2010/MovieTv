@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 public enum ApiError {
     case internetError(String)
@@ -16,11 +17,13 @@ public enum ApiError {
 class MovieListViewModel:ViewModelProtocol {
     
     private let disposable = DisposeBag()
+    public let info: PublishSubject<Info> = PublishSubject()
     public let movieList : PublishSubject<[EachItemViewModel]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()
+    private let _movieInfo = BehaviorRelay<String>(value: "")
    
-    func getResource() -> Resource<ResponseModel> {
+    func getResource<T>(value:T.Type) -> Any {
         guard let url = URL.convertUrl(urlStr: URL.mvieListUrl) else {
             fatalError("URl was incorrect")
         }
@@ -29,7 +32,7 @@ class MovieListViewModel:ViewModelProtocol {
         return resource
     }
     
-    func fetchDtaWith(resource: Resource<ResponseModel>) {
+    func fetchDtaWith<T>(resource: Resource<T>) {
         
         guard Reachability.isConnectedToNetwork() else {
             self.error.onNext(.internetError(UIMessages.offline))
@@ -43,8 +46,12 @@ class MovieListViewModel:ViewModelProtocol {
             .subscribe(onNext: {[weak self] response in
                 self?.loading.onNext(false)
                 switch response{
-                case .success(let data):
-                    let movieList = data.results?.compactMap(EachItemViewModel.init)
+                case .success(let data ):
+                    print(data)
+                    let data = data as! ResponseModel
+                    let movieList = data.results?.map({ (item) -> EachItemViewModel in
+                        return EachItemViewModel(item)
+                    })
                     if let movieList = movieList{
                         self?.movieList.onNext(movieList)
                     }

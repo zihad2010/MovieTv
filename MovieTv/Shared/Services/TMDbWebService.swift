@@ -42,7 +42,7 @@ enum RequestError: Error {
 
 class TMDbWebService {
     
-    static func load<T>(resource: Resource<T>) -> Observable<(ApiResult<T>)> {
+    static func load<T:Codable>(resource: Resource<T>) -> Observable<(ApiResult<T>)> {
         
         return Observable.just(resource.url)
             .flatMap { url -> Observable<(response: HTTPURLResponse, data: Data)> in
@@ -55,7 +55,8 @@ class TMDbWebService {
                     do {
                         let data = try JSONDecoder().decode(T.self, from: data)
                         return ApiResult.success(data)
-                    } catch  {
+                    } catch ( _) {
+                        //print(error.localizedDescription)
                         return ApiResult.failure(.unknownError)
                     }
                 case 400...499:

@@ -15,14 +15,15 @@ class MovieListViewController: UIViewController {
     @IBOutlet private weak var movieListCollectionView: UICollectionView!
     
     private let disposable = DisposeBag()
-    private var viewModel = MovieListViewModel()
+    public var viewModel = MovieListViewModel()
     var coordinator: MovieListCoordinator?
     private let loader = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        self.viewModel.fetchDtaWith(resource: self.viewModel.getResource())
+        
+        self.viewModel.fetchDtaWith(resource:self.viewModel.getResource(value: String.self) as! Resource<ResponseModel>)
         self.movieListCollectionView.collectionViewLayout = UICollectionViewFlowLayout.customizedCollectionViewLayoutFor(self.movieListCollectionView)
     }
     
@@ -41,14 +42,14 @@ class MovieListViewController: UIViewController {
             .error
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { error in
-            switch error{
-            case .internetError(let mess):
-                ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
-            case .serverMessage(let mess):
-                ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
-            }
-        })
-        .disposed(by: disposable)
+                switch error{
+                case .internetError(let mess):
+                    ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
+                case .serverMessage(let mess):
+                    ToastView.shared.short(self.view, txt_msg: "  \(mess)  ")
+                }
+            })
+            .disposed(by: disposable)
         
         // collectionview ---
         self.movieListCollectionView.register(UINib(nibName: "MovTvItemCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: String(describing: MovTvItemCollectionViewCell.self))
@@ -63,11 +64,11 @@ class MovieListViewController: UIViewController {
         
         //delegate ---
         movieListCollectionView
-            .rx
-            .itemSelected.subscribe { indexPath in
-            
-        }
-        .disposed(by: disposable)
+            .rx.modelSelected(EachItemViewModel.self)
+            .subscribe(onNext: {model in
+                self.viewModel.info.onNext(Info(id: model.id, type: TMDbSearchingCollection(index: 0).map { $0.rawValue }))
+            })
+            .disposed(by: disposable)
     }
     
 }

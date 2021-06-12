@@ -7,14 +7,28 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class ShowsDetailsCoordinator: Coordinator {
     
     var childCoordinators: [Coordinator] = []
-    let navigationController = UINavigationController()
+    private let navigationController: UINavigationController
+    private let info: Info
+    
+    init(navigationController: UINavigationController,info: Info) {
+        self.navigationController = navigationController
+        self.info = info
+    }
 
     func start() {
         let showsDetailsViewController: ShowsDetailsViewController = .instantiate()
+        showsDetailsViewController.viewModel.info.accept(self.info)
+        showsDetailsViewController.coordinator = self
         navigationController.pushViewController(showsDetailsViewController, animated: true)
+    }
+    
+    func popViewController() {
+        self.navigationController.popViewController(animated: true)
     }
 }

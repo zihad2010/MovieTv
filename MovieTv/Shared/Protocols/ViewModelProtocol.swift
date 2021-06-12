@@ -8,6 +8,6 @@
 import Foundation
 
 protocol ViewModelProtocol {
-    func getResource() -> Resource<ResponseModel>
-    func fetchDtaWith(resource: Resource<ResponseModel>)
+    func getResource<T>(value: T.Type) -> Any
+    func fetchDtaWith<T>(resource:Resource<T>)
 }

@@ -33,6 +33,20 @@ extension URL {
 }
 
 extension URL {
+    static func getDetailsUrl(info:Info)-> URL? {
+        guard let type = info.type,let id = info.id else { return nil }
+        return convertUrl(urlStr: "\(URL.baseUrl)/\(type)/\(id)?api_key=\(apiKey)")
+    }
+}
+
+extension URL {
+    static func getImageUrl(path: String?) -> URL? {
+        guard let path = path else { return nil }
+        return URL(string: "\(URL.photoBaseUrl)\(path )")
+    }
+}
+
+extension URL {
     
     mutating func appendQueryItem(name: String, value: String?) {
         

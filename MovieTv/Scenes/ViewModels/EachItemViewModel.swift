@@ -9,25 +9,16 @@ import Foundation
 
 struct EachItemViewModel {
     
-    let result: Results
+    var title: String?
+    var posterURL: URL?
+    var  id: Int?
     
     init(_ result: Results) {
-        self.result = result
-    }
-    
-    var title: String {
-       
-        if let title = result.title {
-            return title
-        }else{
-            return result.name ?? ""
+        
+        self.id = result.id
+        self.title = result.title ?? result.name ?? ""
+        if let path = result.poster_path{
+            self.posterURL = URL(string: "\(URL.photoBaseUrl)\(path)")
         }
-    }
-    
-    var posterURL: URL? {
-        if let path = result.poster_path {
-            return URL(string: "\(URL.photoBaseUrl)\(path)")
-        }
-        return nil
     }
 }
