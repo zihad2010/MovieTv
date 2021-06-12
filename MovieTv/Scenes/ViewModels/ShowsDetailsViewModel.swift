@@ -11,7 +11,6 @@ import RxCocoa
 class ShowsDetailsViewModel {
     
     private let disposable = DisposeBag()
-    
     public let info: BehaviorRelay<Info> = BehaviorRelay(value: Info())
     public let loading: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     public let error : PublishSubject<ApiError> = PublishSubject()
@@ -21,24 +20,17 @@ class ShowsDetailsViewModel {
     public let language: PublishSubject<String> = PublishSubject()
     public let generDetails: PublishSubject<String> = PublishSubject()
     public let overView: PublishSubject<String> = PublishSubject()
-  
-    private static let dateFormatter: DateFormatter = {
-        $0.dateFormat = "yyyy"
-        return $0
-    }(DateFormatter())
     
-    func getResource(info: Info) -> Resource<MovieDetailsResponse> {
-        
+    func getResource(info: Info) -> Resource<DetailsResponse> {
         guard let url = URL.getDetailsUrl(info: info) else {
             fatalError("URl was incorrect")
         }
-        var resource = Resource<MovieDetailsResponse>(url: url)
+        var resource = Resource<DetailsResponse>(url: url)
         resource.httpMethod = .get
         return resource
     }
     
-    func fetchDtaWith(resource: Resource<MovieDetailsResponse>) {
-    
+    func fetchDtaWith(resource: Resource<DetailsResponse>) {
         self.loading.accept(true)
         TMDbWebService
             .load(resource: resource)
@@ -47,28 +39,8 @@ class ShowsDetailsViewModel {
                 self?.loading.accept(false)
                 switch response{
                 case .success(let data):
-                    if let title = data.original_title {
-                        self?.title.onNext(title)
-                    }
-                    if let url = URL.getImageUrl(path: data.backdrop_path) {
-                        self?.posterImageUrl.onNext(url)
-                    }
-                    if let ratingDetail = self?.movieInfoString(movieDetail: data) {
-                        self?.ratingDetails.onNext(ratingDetail)
-                    }
-                    if let lan = data.original_language {
-                        self?.language.onNext(lan)
-                    }
-                    if let overView = data.overview {
-                        self?.overView.onNext(overView)
-                    }
+                    self?.convertIntoViewDetails(data)
                     
-                    if let gener = self?.moveGenerDetails(movieDetail: data) {
-                        self?.generDetails.onNext(gener)
-                    }
-                
-                
-                  break
                 case .failure(let failure):
                     switch failure {
                     case .unknownError:
@@ -89,30 +61,62 @@ class ShowsDetailsViewModel {
 
 extension ShowsDetailsViewModel {
     
-    private func moveGenerDetails(movieDetail: MovieDetailsResponse) -> String? {
-       
+    fileprivate func moveGenerDetails(movieDetail: DetailsResponse) -> String? {
+        
         let generList = movieDetail.genres?.map({ (item) -> String in
             return item.name ?? ""
         })
-       return generList?.joined(separator:" • ")
-
+        return generList?.joined(separator:" • ")
+        
     }
     
-    private func movieInfoString(movieDetail: MovieDetailsResponse) -> String {
-        var details = "" //2019 • 129 min • 5.9/10 ★
+    fileprivate func movieInfoString(movieDetail: DetailsResponse) -> String? {
+        var details = ""
         if let releaseDate = movieDetail.release_date {
-            details += releaseDate//ShowsDetailsViewModel.dateFormatter.string(from: releaseDate)
+            details += releaseDate
+        }
+        if let releaseDate = movieDetail.first_air_date {
+            details += releaseDate
         }
         if let runtime = movieDetail.runtime {
+            
             details += (details.isEmpty ? "" : " • ") + "\(runtime) min"
         }
-
+        if let runtime = movieDetail.episode_run_time {
+            let runtime = runtime.reduce(0, +)
+            details += (details.isEmpty ? "" : " • ") + "\(runtime) min"
+        }
+        
         if let voteAvg = movieDetail.vote_average {
             details += (details.isEmpty ? "" : " • ") + "\(voteAvg)/10 ★"
         }
         return details
     }
     
+    fileprivate func convertIntoViewDetails(_ data: (DetailsResponse)) {
+        
+        if let title = data.original_title {
+            self.title.onNext(title)
+        }
+        if let title = data.original_name {
+            self.title.onNext(title)
+        }
+        if let url = URL.getImageUrl(path: data.backdrop_path) {
+            self.posterImageUrl.onNext(url)
+        }
+        if let ratingDetail = self.movieInfoString(movieDetail: data) {
+            self.ratingDetails.onNext(ratingDetail)
+        }
+        if let lan = data.original_language {
+            self.language.onNext(lan)
+        }
+        if let overView = data.overview {
+            self.overView.onNext(overView)
+        }
+        if let gener = self.moveGenerDetails(movieDetail: data) {
+            self.generDetails.onNext(gener)
+        }
+    }
 }
 
 struct Info {

@@ -22,7 +22,7 @@ class MovieListViewModel:ViewModelProtocol {
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()
     private let _movieInfo = BehaviorRelay<String>(value: "")
-   
+    
     func getResource<T>(value:T.Type) -> Any {
         guard let url = URL.convertUrl(urlStr: URL.mvieListUrl) else {
             fatalError("URl was incorrect")

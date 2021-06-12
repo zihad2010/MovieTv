@@ -11,10 +11,11 @@ import RxSwift
 class TVShowsListViewModel: ViewModelProtocol {
     
     private let disposable = DisposeBag()
+    public let info: PublishSubject<Info> = PublishSubject()
     public let tvShowsList : PublishSubject<[EachItemViewModel]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()
-   
+    
     func getResource<T>(value:T.Type) -> Any {
         guard let url = URL.convertUrl(urlStr: URL.tvShowsListUrl) else {
             fatalError("URl was incorrect")
@@ -23,7 +24,6 @@ class TVShowsListViewModel: ViewModelProtocol {
         resource.httpMethod = .get
         return resource
     }
-    
     
     func fetchDtaWith<T>(resource: Resource<T>)  {
         

@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct MovieDetailsResponse: Codable {
+struct DetailsResponse: Codable {
     let adult : Bool?
     let backdrop_path : String?
-   // let belongs_to_collection : [Belongs_to_collection]?
+    let episode_run_time : [Int]?
     let budget : Int?
     let genres : [Genres]?
     let homepage : String?
@@ -30,10 +30,23 @@ struct MovieDetailsResponse: Codable {
     let status : String?
     let tagline : String?
     let title : String?
+    let original_name : String?
+    let first_air_date : String?
     let video : Bool?
     let vote_average : Double?
     let vote_count : Int?
 }
+
+struct Seasons : Codable {
+    let air_date : String?
+    let episode_count : Int?
+    let id : Int?
+    let name : String?
+    let overview : String?
+    let poster_path : String?
+    let season_number : Int?
+}
+
 struct Belongs_to_collection : Codable {
     let id : Int?
     let name : String?

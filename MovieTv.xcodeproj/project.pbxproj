@@ -27,8 +27,7 @@
 		87705F2726738CC10009146A /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87705F2626738CC10009146A /* SearchResultTableViewCell.swift */; };
 		87705F2C26738D110009146A /* SearchShowsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87705F2B26738D110009146A /* SearchShowsViewModel.swift */; };
 		87705F572673EE9E0009146A /* SearchResultCellVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87705F562673EE9E0009146A /* SearchResultCellVM.swift */; };
-		87824125267498AB00D84F8C /* MovieDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87824124267498AA00D84F8C /* MovieDetailsResponse.swift */; };
-		8782412A2674997700D84F8C /* TVShowsDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878241292674997700D84F8C /* TVShowsDetailsResponse.swift */; };
+		87824125267498AB00D84F8C /* DetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87824124267498AA00D84F8C /* DetailsResponse.swift */; };
 		8782412F26749F4E00D84F8C /* poster.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 8782412E26749F4E00D84F8C /* poster.jpeg */; };
 		878241342674AA1B00D84F8C /* ShowsDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878241332674AA1B00D84F8C /* ShowsDetailsViewModel.swift */; };
 		8783F4962671153D008D88F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8783F4952671153D008D88F3 /* AppDelegate.swift */; };
@@ -104,8 +103,7 @@
 		87705F2626738CC10009146A /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		87705F2B26738D110009146A /* SearchShowsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchShowsViewModel.swift; sourceTree = "<group>"; };
 		87705F562673EE9E0009146A /* SearchResultCellVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCellVM.swift; sourceTree = "<group>"; };
-		87824124267498AA00D84F8C /* MovieDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsResponse.swift; sourceTree = "<group>"; };
-		878241292674997700D84F8C /* TVShowsDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsDetailsResponse.swift; sourceTree = "<group>"; };
+		87824124267498AA00D84F8C /* DetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsResponse.swift; sourceTree = "<group>"; };
 		8782412E26749F4E00D84F8C /* poster.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = poster.jpeg; sourceTree = "<group>"; };
 		878241332674AA1B00D84F8C /* ShowsDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsDetailsViewModel.swift; sourceTree = "<group>"; };
 		8783F4922671153D008D88F3 /* MovieTv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTv.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,8 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				8758E48926727CC1003FABA0 /* ResponseModel.swift */,
-				87824124267498AA00D84F8C /* MovieDetailsResponse.swift */,
-				878241292674997700D84F8C /* TVShowsDetailsResponse.swift */,
+				87824124267498AA00D84F8C /* DetailsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -673,7 +670,7 @@
 				8783F56F267126EE008D88F3 /* TabBarCoordinator.swift in Sources */,
 				8783F4962671153D008D88F3 /* AppDelegate.swift in Sources */,
 				87705F2C26738D110009146A /* SearchShowsViewModel.swift in Sources */,
-				87824125267498AB00D84F8C /* MovieDetailsResponse.swift in Sources */,
+				87824125267498AB00D84F8C /* DetailsResponse.swift in Sources */,
 				8783F58D26712F7C008D88F3 /* SearchShowsCoordinator.swift in Sources */,
 				8783F54A26711B3C008D88F3 /* URLResponse+Extension.swift in Sources */,
 				8783F58826712F5A008D88F3 /* MovieListCoordinator.swift in Sources */,
@@ -683,7 +680,6 @@
 				8783F5AA26713690008D88F3 /* UIViewController+Extensions.swift in Sources */,
 				8758E4F126728CD2003FABA0 /* StrokeColorAnimation.swift in Sources */,
 				8758E4F326728CD2003FABA0 /* ProgressView.swift in Sources */,
-				8782412A2674997700D84F8C /* TVShowsDetailsResponse.swift in Sources */,
 				87705F572673EE9E0009146A /* SearchResultCellVM.swift in Sources */,
 				8758E4E726728CB1003FABA0 /* ActivityIndicator.swift in Sources */,
 				8758E48F26727E6B003FABA0 /* ViewModelProtocol.swift in Sources */,

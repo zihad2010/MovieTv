@@ -11,7 +11,6 @@ import RxCocoa
 
 class SearchShowsViewModel {
     
-    
     private let disposable = DisposeBag()
     private var searchType: String? =  TMDbSearchingCollection(index: 0).map { $0.rawValue }
     public var segmentIndex = PublishRelay<Int>()
@@ -47,7 +46,6 @@ class SearchShowsViewModel {
     }
     
     func getResource(type:String,query: String) -> Resource<ResponseModel> {
-        
         guard let url = URL.getSearchingUrl(type, query) else {
             fatalError("URl was incorrect")
         }
@@ -55,11 +53,10 @@ class SearchShowsViewModel {
         resource.httpMethod = .get
         return resource
     }
-    
 }
 
 extension SearchShowsViewModel {
-   
+    
     func fetchDtaWith(resource: Resource<ResponseModel>) {
         
         guard Reachability.isConnectedToNetwork() else {
@@ -100,7 +97,7 @@ extension SearchShowsViewModel {
 public enum TMDbSearchingCollection: String, CustomStringConvertible, CaseIterable {
     case movie
     case tv
-   
+    
     public init?(index: Int) {
         switch index {
         case 0:

@@ -15,7 +15,7 @@ class TVShowsViewController: UIViewController {
     
     var coordinator: TVShowsCoordinator?
     private let disposable = DisposeBag()
-    private var viewModel = TVShowsListViewModel()
+    public var viewModel = TVShowsListViewModel()
     private let loader = ActivityIndicator()
     
     override func viewDidLoad() {
@@ -61,11 +61,13 @@ class TVShowsViewController: UIViewController {
             }
             .disposed(by: disposable)
         
-        self.tvShowsListCollectionView
-            .rx
-            .itemSelected
-            .subscribe { indexPath in
-                
-        }.disposed(by: disposable)
+        //delegate ---
+        tvShowsListCollectionView
+            .rx.modelSelected(EachItemViewModel.self)
+            .subscribe(onNext: {model in
+                self.viewModel.info.onNext(Info(id: model.id, type: TMDbSearchingCollection(index: 1).map { $0.rawValue }))
+            })
+            .disposed(by: disposable)
     }
+    
 }
