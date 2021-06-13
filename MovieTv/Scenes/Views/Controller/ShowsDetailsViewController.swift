@@ -63,9 +63,10 @@ class ShowsDetailsViewController: UIViewController {
         viewModel
             .posterImageUrl
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { url in
-                self.posterImageView.getImage(url: url, placeholderImage: UIImage()) { (success) in
+            .subscribe(onNext: {[weak self] url in
+                self?.posterImageView.getImage(url: url, placeholderImage: UIImage.largePlaceHolder) { (success) in
                 } failer: { (failed) in
+                    self?.posterImageView.image = UIImage.largePlaceHolder
                 }
             }).disposed(by: disposable)
         

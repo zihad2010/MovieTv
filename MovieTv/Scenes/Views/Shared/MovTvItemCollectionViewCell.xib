@@ -23,7 +23,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Uy-dt-Azg">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="ThumbPlaceHolder" translatesAutoresizingMaskIntoConstraints="NO" id="8Uy-dt-Azg">
                         <rect key="frame" x="0.0" y="0.0" width="170" height="161.5"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                     </imageView>
@@ -48,6 +48,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="ThumbPlaceHolder" width="500" height="750"/>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

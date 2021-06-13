@@ -24,9 +24,9 @@ final class TVShowsCoordinator: NSObject,Coordinator {
                 self?.showDetails(info: info)
             })
             .disposed(by:disposable)
-        navigationController.tabBarItem.title = "TV Shows"
-        navigationController.tabBarItem.image = UIImage(named: "unselectedTv")
-        navigationController.tabBarItem.selectedImage = UIImage(named:"selectedTv")
+        navigationController.tabBarItem.title = TabBarItem.tvShows
+        navigationController.tabBarItem.image = UIImage.unselectedTv
+        navigationController.tabBarItem.selectedImage = UIImage.selectedTv
         navigationController.navigationBar.barStyle = .black
         navigationController.navigationBar.isHidden = true
         navigationController.pushViewController(tvShowsViewController, animated: true)

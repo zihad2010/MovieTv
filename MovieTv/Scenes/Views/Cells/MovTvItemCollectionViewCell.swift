@@ -18,9 +18,9 @@ class MovTvItemCollectionViewCell: UICollectionViewCell {
             guard let url = eachMovie.posterURL else {
                 return
             }
-            posterImage.getImage(url: url, placeholderImage: UIImage(named: "placeholder")) { (success) in
+            posterImage.getImage(url: url, placeholderImage: UIImage.thumbPlaceHolder) { (success) in
             } failer: { [weak self] (faield) in
-                self?.posterImage.image = UIImage(named: "placeholder")
+                self?.posterImage.image = UIImage.thumbPlaceHolder
             }
         }
     }

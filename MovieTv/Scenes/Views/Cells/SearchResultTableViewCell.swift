@@ -18,9 +18,9 @@ class SearchResultTableViewCell: UITableViewCell {
             guard let url = eachMovie.posterURL else {
                 return
             }
-            posterImageView.getImage(url: url, placeholderImage: UIImage(named: "placeholder")) { (success) in
+            posterImageView.getImage(url: url, placeholderImage: UIImage.thumbPlaceHolder) { (success) in
             } failer: { [weak self] (faield) in
-                self?.posterImageView.image = UIImage(named: "placeholder")
+                self?.posterImageView.image = UIImage.thumbPlaceHolder
             }
         }
     }
