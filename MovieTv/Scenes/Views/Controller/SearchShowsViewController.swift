@@ -14,6 +14,7 @@ class SearchShowsViewController: UIViewController {
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var infoLabel: UILabel!
     
     private let disposable = DisposeBag()
     public var viewModel = SearchShowsViewModel()
@@ -62,6 +63,12 @@ class SearchShowsViewController: UIViewController {
             })
             .disposed(by: disposable)
         
+        self.viewModel
+            .isHidden
+            .subscribe(onNext: { isHidden in
+                self.infoLabel.isHidden = isHidden
+                self.searchResultTableView.isHidden = !isHidden
+            }).disposed(by: disposable)
         
         //Loader ----
         self.viewModel

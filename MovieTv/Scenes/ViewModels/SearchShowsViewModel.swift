@@ -17,6 +17,7 @@ class SearchShowsViewModel {
     private var lastSarchText: String?
     public var segmentIndex = PublishRelay<Int>()
     public var searchText =  BehaviorRelay<String>(value: "")
+    public var isHidden =  BehaviorRelay<Bool>(value: false)
     public let searchResultList : PublishSubject<[EachItemViewModel]> = PublishSubject()
     public let loading: PublishSubject<Bool> = PublishSubject()
     public let error : PublishSubject<ApiError> = PublishSubject()
@@ -47,6 +48,7 @@ class SearchShowsViewModel {
                     self?.fetchDtaWith(resource: (self?.getResource(type: (self?.searchType)!, query: text))!)
                 }else{
                     self?.searchResultList.onNext([])
+                    self?.isHidden.accept(false)
                 }
             })
             .disposed(by: disposable)
@@ -86,8 +88,10 @@ extension SearchShowsViewModel {
                     })
                     if let searchResult = searchResult{
                         self?.searchResultList.onNext(searchResult)
+                        self?.isHidden.accept(true)
                     }
                 case .failure(let failure):
+                    self?.isHidden.accept(false)
                     switch failure {
                     case .unknownError:
                         self?.error.onNext(.serverMessage(UIMessages.error))

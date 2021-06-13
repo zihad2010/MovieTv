@@ -165,6 +165,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start searching your favourite movies/Tv shows." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LhZ-dc-dnU">
+                                <rect key="frame" x="22" y="438" width="370" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0Y-0j-KfF">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
                                 <subviews>
@@ -279,13 +285,17 @@
                         <constraints>
                             <constraint firstItem="vcf-qB-laP" firstAttribute="leading" secondItem="bVe-g4-Kj0" secondAttribute="leading" id="1pc-pX-VlU"/>
                             <constraint firstItem="oql-l9-Zbm" firstAttribute="leading" secondItem="bVe-g4-Kj0" secondAttribute="leading" id="41G-hL-Tqd"/>
+                            <constraint firstItem="LhZ-dc-dnU" firstAttribute="centerX" secondItem="06C-Dy-Evz" secondAttribute="centerX" id="5IQ-jP-KuW"/>
                             <constraint firstItem="W0Y-0j-KfF" firstAttribute="trailing" secondItem="bVe-g4-Kj0" secondAttribute="trailing" id="6KP-Ou-aVj"/>
                             <constraint firstItem="bVe-g4-Kj0" firstAttribute="trailing" secondItem="tDh-8c-9cS" secondAttribute="trailing" id="B3Q-Bp-iSx"/>
+                            <constraint firstItem="bVe-g4-Kj0" firstAttribute="trailing" secondItem="LhZ-dc-dnU" secondAttribute="trailing" constant="22" id="FnT-L9-1XW"/>
+                            <constraint firstItem="LhZ-dc-dnU" firstAttribute="centerY" secondItem="06C-Dy-Evz" secondAttribute="centerY" id="PvS-gC-DSX"/>
                             <constraint firstItem="tDh-8c-9cS" firstAttribute="leading" secondItem="bVe-g4-Kj0" secondAttribute="leading" id="bFL-Yx-OR6"/>
                             <constraint firstItem="bVe-g4-Kj0" firstAttribute="bottom" secondItem="tDh-8c-9cS" secondAttribute="bottom" id="ckP-ID-nFZ"/>
                             <constraint firstItem="bVe-g4-Kj0" firstAttribute="trailing" secondItem="oql-l9-Zbm" secondAttribute="trailing" id="igy-yg-G0w"/>
                             <constraint firstItem="tDh-8c-9cS" firstAttribute="top" secondItem="vcf-qB-laP" secondAttribute="bottom" id="ndp-zA-ICx"/>
                             <constraint firstItem="W0Y-0j-KfF" firstAttribute="top" secondItem="06C-Dy-Evz" secondAttribute="top" id="qed-ru-2IS"/>
+                            <constraint firstItem="LhZ-dc-dnU" firstAttribute="leading" secondItem="bVe-g4-Kj0" secondAttribute="leading" constant="22" id="vtr-WA-zvL"/>
                             <constraint firstItem="oql-l9-Zbm" firstAttribute="top" secondItem="bVe-g4-Kj0" secondAttribute="top" id="x58-H0-bl1"/>
                             <constraint firstItem="W0Y-0j-KfF" firstAttribute="leading" secondItem="bVe-g4-Kj0" secondAttribute="leading" id="xBw-r2-1Cf"/>
                             <constraint firstItem="vcf-qB-laP" firstAttribute="top" secondItem="W0Y-0j-KfF" secondAttribute="bottom" id="xrr-JQ-J1Q"/>
@@ -293,6 +303,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="infoLabel" destination="LhZ-dc-dnU" id="Ppf-DN-ecy"/>
                         <outlet property="searchBar" destination="vcf-qB-laP" id="Zmm-zr-caG"/>
                         <outlet property="searchResultTableView" destination="tDh-8c-9cS" id="I0t-s6-SJ0"/>
                         <outlet property="segmentControl" destination="DfM-fP-xNa" id="Tte-p6-98G"/>
