@@ -20,15 +20,17 @@ class SearchShowsViewController: UIViewController {
     private let loader = ActivityIndicator()
     var coordinator: SearchShowsCoordinator?
     
-    
+    //MARK:- View Lifecycle
+    //Start searching your favourite movies
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
     }
     
+    //MARK:-data binding-
     
     private func setupBindings() {
-        
+        //segmentControl---
         segmentControl
             .rx
             .selectedSegmentIndex.bind(to: self.viewModel.segmentIndex)

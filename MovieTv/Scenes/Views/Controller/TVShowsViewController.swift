@@ -18,12 +18,16 @@ class TVShowsViewController: UIViewController {
     public var viewModel = TVShowsListViewModel()
     private let loader = ActivityIndicator()
     
+    //MARK:- View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        self.viewModel.fetchDtaWith(resource:self.viewModel.getResource(value: String.self) as! Resource<ResponseModel>)
+        self.viewModel.getDataWith(resource:self.viewModel.getResource(value: String.self) as! Resource<ResponseModel>)
         self.tvShowsListCollectionView.collectionViewLayout = UICollectionViewFlowLayout.customizedCollectionViewLayoutFor(self.tvShowsListCollectionView)
     }
+    
+    //MARK:- data binding
     
     private func setupBindings() {
         

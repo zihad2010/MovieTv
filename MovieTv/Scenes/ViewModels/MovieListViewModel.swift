@@ -32,7 +32,9 @@ class MovieListViewModel:ViewModelProtocol {
         return resource
     }
     
-    func fetchDtaWith<T>(resource: Resource<T>) {
+    //MARK:- request for data from API session
+
+    func getDataWith<T>(resource: Resource<T>) {
         
         guard Reachability.isConnectedToNetwork() else {
             self.error.onNext(.internetError(UIMessages.offline))

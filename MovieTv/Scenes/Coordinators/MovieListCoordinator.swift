@@ -39,8 +39,10 @@ final class MovieListCoordinator: NSObject,Coordinator {
         showsDetailsCoordinator.start()
     }
 }
+//MARK:- remove child
 
 extension MovieListCoordinator: UINavigationControllerDelegate {
+    
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
             return

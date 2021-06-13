@@ -30,7 +30,9 @@ class ShowsDetailsViewModel {
         return resource
     }
     
-    func fetchDtaWith(resource: Resource<DetailsResponse>) {
+    //MARK:- request for data from API session
+
+    func getDataWith(resource: Resource<DetailsResponse>) {
         self.loading.accept(true)
         TMDbWebService
             .load(resource: resource)
@@ -67,7 +69,6 @@ extension ShowsDetailsViewModel {
             return item.name ?? ""
         })
         return generList?.joined(separator:" • ")
-        
     }
     
     fileprivate func movieInfoString(movieDetail: DetailsResponse) -> String? {

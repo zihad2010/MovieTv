@@ -9,5 +9,5 @@ import Foundation
 
 protocol ViewModelProtocol {
     func getResource<T>(value: T.Type) -> Any
-    func fetchDtaWith<T>(resource:Resource<T>)
+    func getDataWith<T>(resource:Resource<T>)
 }

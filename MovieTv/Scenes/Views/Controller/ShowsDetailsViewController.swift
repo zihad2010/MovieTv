@@ -24,17 +24,18 @@ class ShowsDetailsViewController: UIViewController {
     private let loader = ActivityIndicator()
     private let disposable = DisposeBag()
     
+    //MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupBindings()
     }
     
+    //MARK:- data binding
     private func setupBindings(){
         
         viewModel.info.subscribe(onNext: { [self] info in
             
-            self.viewModel.fetchDtaWith(resource: self.viewModel.getResource(info: info))
+            self.viewModel.getDataWith(resource: self.viewModel.getResource(info: info))
         }).disposed(by: disposable)
         
         //Loader ----

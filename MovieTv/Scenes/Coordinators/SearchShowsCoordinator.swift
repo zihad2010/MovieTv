@@ -42,7 +42,10 @@ final class SearchShowsCoordinator: NSObject,Coordinator {
     
 }
 
+//MARK:- remove child
+
 extension SearchShowsCoordinator: UINavigationControllerDelegate {
+    
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
             return

@@ -23,15 +23,12 @@ final class TabBarCoordinator: Coordinator {
         let tabBarController = UITabBarController()
         
         let movieListCoordinator = MovieListCoordinator()
-        self.childCoordinators.append(movieListCoordinator)
         movieListCoordinator.start()
         
         let tvShowsCoordinator = TVShowsCoordinator()
-        self.childCoordinators.append(tvShowsCoordinator)
         tvShowsCoordinator.start()
         
         let searchShowsCoordinator = SearchShowsCoordinator()
-        self.childCoordinators.append(searchShowsCoordinator)
         searchShowsCoordinator.start()
         
         tabBarController.viewControllers = [movieListCoordinator.navigationController,tvShowsCoordinator.navigationController,searchShowsCoordinator.navigationController]

@@ -64,6 +64,8 @@ class SearchShowsViewModel {
 
 extension SearchShowsViewModel {
     
+    //MARK:- request for data from API session
+
     func fetchDtaWith(resource: Resource<ResponseModel>) {
         
         guard Reachability.isConnectedToNetwork() else {
