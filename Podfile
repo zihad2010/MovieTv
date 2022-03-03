@@ -9,6 +9,7 @@ target 'MovieTv' do
     pod 'RxSwift', '~> 5'
     pod 'RxCocoa', '~> 5'
     pod 'SDWebImage', '~> 5.0' 
+    pod 'AppCenter'
 
   target 'MovieTvTests' do
     inherit! :search_paths

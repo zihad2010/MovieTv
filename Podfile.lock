@@ -1,4 +1,12 @@
 PODS:
+  - AppCenter (4.4.1):
+    - AppCenter/Analytics (= 4.4.1)
+    - AppCenter/Crashes (= 4.4.1)
+  - AppCenter/Analytics (4.4.1):
+    - AppCenter/Core
+  - AppCenter/Core (4.4.1)
+  - AppCenter/Crashes (4.4.1):
+    - AppCenter/Core
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -10,23 +18,26 @@ PODS:
   - SDWebImage/Core (5.11.1)
 
 DEPENDENCIES:
+  - AppCenter
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
+    - AppCenter
     - RxCocoa
     - RxRelay
     - RxSwift
     - SDWebImage
 
 SPEC CHECKSUMS:
+  AppCenter: b0b6f1190215b5f983c42934db718f3b46fff3c0
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
-PODFILE CHECKSUM: 7a4993450c6ba2184db7aaefb6c1ce53a05cdd17
+PODFILE CHECKSUM: 46056fbcf436f113c9c9f0ba68e9d531c945f077
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
